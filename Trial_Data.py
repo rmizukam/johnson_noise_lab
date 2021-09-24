@@ -1,8 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import math
-from scipy.optimize import curve_fit
-from scipy import integrate
+# import matplotlib.pyplot as plt
+# import math
+# from scipy.optimize import curve_fit
+# from scipy import integrate
 
 class Trial_Data:
     def __init__(self,data,resistance,gain):
