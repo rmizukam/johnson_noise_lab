@@ -14,6 +14,14 @@ class Trial_Data:
 
     def error(self):
         return (np.amax(self.data) - np.amin(self.data))/(2*math.sqrt(len(self.data)))
+
+    def inferred(self):
+        return self.data *10 /(600**2)/(self.gain**2)
+
+    def mean(self):
+        return np.mean(self.data)
+    
+    
     
     # def correcting_data(self,correction_factor):   # need to extrapolate a plot first
         # self.correcting_data = np.subtract(self.data,correction_factor)
