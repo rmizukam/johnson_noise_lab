@@ -24,3 +24,5 @@ class Frequency_Trial_Data:
     def mean(self):
         return np.mean(self.data)
     
+    def plot(self):
+        pass
