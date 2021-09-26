@@ -40,3 +40,5 @@ ftri9_100 = Trial_Data(np.array([0.811, 0.827, 0.811, 0.825, 0.814]),100,10000)
 # dy = np.array([tri1.error(), tri2.error(), tri3.error()])
 m1, b1, dm1, db1 = linerrplt(1,'Correction Curve $\Delta$ f = 11kHz', 'Resistance $\Omega$', '$<V_J^2 + V_N^2>$','linear','linear',\
      np.array([1,10,100]), np.array([tri1.inferred(), tri2.inferred(), tri3.inferred()]), np.array([tri1.error(), tri2.error(), tri3.error()]),'yes' ,'yes')
+
+'this is a test edit'
