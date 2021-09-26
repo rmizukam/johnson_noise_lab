@@ -1,12 +1,13 @@
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import math
 # from scipy.optimize import curve_fit
 # from scipy import integrate
 
 class Frequency_Trial_Data:
     def __init__(self,data,resistance,gain,frequncies):
-        self.data = data
+        self.mean = np.mean(data)
+        self.raw_data = data
         self.resistance = resistance
         self.gain = gain
         self.highpass = frequncies[0]
@@ -19,4 +20,4 @@ class Frequency_Trial_Data:
         return (np.amax(self.data - np.amin(self.data)) / 2*math.sqrt(len(self.data)))*10 / 600**2 / self.gain**2
 
     def inferred(self):
-        return self.data *10 / 600**2 / self.gain**2
+        return self.mean *10 / 600**2 / self.gain**2
