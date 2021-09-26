@@ -11,9 +11,9 @@ def lin_func(x,b,m):
 
 def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata, ydata, yerror, show_fit, show_plot):
     plt.figure(fig_num)
-    plt.xlabel(xlabel, fontsize = 16)
-    plt.ylabel(ylabel, fontsize = 16)
-    plt.title(title, fontsize = 16)
+    plt.xlabel(xlabel, fontsize = 12)
+    plt.ylabel(ylabel, fontsize = 12)
+    plt.title(title, fontsize = 12)
     plt.xscale(xscale)
     plt.yscale(yscale)
     plt.errorbar(xdata,ydata,yerror,fmt='.',c='c')
@@ -60,8 +60,7 @@ def errpropaddsubtract(dx,dy):
             yy = dy[t]**2
             array[t] = math.sqrt(xx + yy)
         return array
-    
-    elif type(x) == int or type(x) == np.float64: 
+    elif type(dx) == int or type(dx) == np.float64: 
         return math.sqrt(dx**2 + dy**2)
 
 def errconst(c,x):
