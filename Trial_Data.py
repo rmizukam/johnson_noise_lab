@@ -17,13 +17,7 @@ class Trial_Data:
 
     def inferred(self):
         return self.data *10 / 600**2 / self.gain**2
-    
-
-
-
-    
-    
-    
+   
     # def correcting_data(self,correction_factor):   # need to extrapolate a plot first
         # self.correcting_data = np.subtract(self.data,correction_factor)
     

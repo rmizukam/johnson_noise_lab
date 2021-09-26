@@ -13,7 +13,7 @@ class Frequency_Trial_Data:
         self.lowpass = frequncies[1]
         self.enbw = frequncies[2]
         # self.correction_factor
-        # self.corrected_data = self.correcting_data(self.correction_factor)   
+        # self.corrected_data = self.correcting_data(self.correction_factor) 
 
     def error(self):
         return (np.amax(self.data - np.amin(self.data)) / 2*math.sqrt(len(self.data)))*10 / 600**2 / self.gain**2
