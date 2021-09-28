@@ -15,12 +15,14 @@ class Trial_Data:
         self.m = 0
         self.dm = 0
         self.inferred = self.mean *10 / 600**2 / self.gain**2
-        self.highpass = frequncies[0]
-        self.lowpass = frequncies[1]
+        self.hp = frequncies[0]
+        self.lp = frequncies[1]
+        self.diff = frequncies[1] - frequncies[0]
         self.enbw = frequncies[2]
 
     def error(self):
-        return (np.amax(self.data - np.amin(self.data)) / 2*math.sqrt(len(self.data)))*10 / 600**2 / self.gain**2
+        return (np.amax(self.data - np.amin(self.data)) /\
+            2*math.sqrt(len(self.data)))*10 / 600**2 / self.gain**2
 
     def corrected_data(self):
         return np.subtract(self.inferred, self.b)

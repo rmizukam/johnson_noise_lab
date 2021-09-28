@@ -9,7 +9,8 @@ def lin_func(x,b,m):
     y = b + m * x
     return y
 
-def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata, ydata, yerror, show_fit):
+def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
+        ydata, yerror, show_fit):
     fig_name = plt.figure(fig_num)
     plt.xlabel(xlabel, fontsize = 12)
     plt.ylabel(ylabel, fontsize = 12)
@@ -31,7 +32,8 @@ def errpropdiv(x,y,dx,dy):
     if type(x) == np.ndarray:
         array = [0] * len(x)
         for t in range(0, len(x)):
-            array[t] = abs(x[t]/y[t]) * math.sqrt((dx[t]/x[t])**2 + (dy[t]/y[t])**2)
+            array[t] = abs(x[t]/y[t]) * math.sqrt((dx[t]/x[t])**2 +\
+                (dy[t]/y[t])**2)
         return array
     elif type(x) == int or type(x) == np.float64:
         return abs(x/y) * math.sqrt((dx/x)**2 + (dy/y)**2)
@@ -42,7 +44,8 @@ def errpropmultiply(x, y, dx, dy):
     if type(x) == np.ndarray:
         array = [0]*len(x)
         for t in range(0,len(x)):
-            array[t] = len(x[t]*y[t]) * math.sqrt((dx[t]/x[t])**2 + (dy[t]/y[t])**2)
+            array[t] = len(x[t]*y[t]) * math.sqrt((dx[t]/x[t])**2 +\
+                (dy[t]/y[t])**2)
         return array
     elif type(x) == int or type(x) == np.float64:
         return abs(x*y) * math.sqrt((dx/x)**2 + (dy/y)**2)
@@ -50,15 +53,25 @@ def errpropmultiply(x, y, dx, dy):
         print('You Passed Data Unusable For This Program')
 
 def errpropaddsubtract(dx,dy):
-    if len(dx) != len(dy):
-        yy = [dy]*len(dx)
-        array = [0]*len(dx)
+    if type(dx)== np.ndarray and type(dy)==np.ndarray:
+        if len(dx) != len(dy):
+            yy = [dy]*len(dx)
+            array = [0]*len(dx)
+            array = np.array(array)
         for t in range(0,len(dx)):
-            xx = dx[t]**2
-            yy = dy[t]**2
+            xx = (dx[t])**2
+            yy = (dy[t])**2
             array[t] = math.sqrt(xx + yy)
         return array
-    elif type(dx) == int or type(dx) == np.float64:
+    elif type(dx) == np.ndarray and type(dy) == np.float64 or type(dy) == float:
+         array = [dy] * len(dx)
+         array = np.array(array)
+         for t in range(0,len(dx)):
+             xx = (dx[t])**2
+             yy = (array[t])**2
+             array[t] = math.sqrt(xx + yy)
+         return array
+    elif type(dx) != np.ndarray and type(dy) != np.ndarray:
         return math.sqrt(dx**2 + dy**2)
 
 def errconst(c,x):
