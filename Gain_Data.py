@@ -24,7 +24,7 @@ class Gain_Data:
             return array
         elif type(self.drmsin)==int or type(self.drmsin)==np.float64 and\
             type(self.drmsout)==int or type(self.drmsout)==np.float64:
-            return math.sqrt(self.drmsin**2 + self.drmsout**2))
+            return math.sqrt(self.drmsin**2 + self.drmsout**2)
 
     def del_plot(self,fignum,title,xlabel,ylabel,xscale,yscale,xdata,ydata,yerr):
         plt.figure(fignum)
