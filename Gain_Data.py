@@ -16,15 +16,17 @@ class Gain_Data:
             type(self.rmsout)==int or type(self.rmsout)==np.float64:
             return self.rmsout / self.rmsin
 
-    def del_gain(self):
-        if type(self.drmsin)==np.ndarray and type(self.drmsout)==np.ndarray:
-            array = []*len(self.drmsin)
-            for t in range(0, len(del_rmsin)):
-                array[x] = math.sqrt((self.drmsin[x]**2)+(self.drmsout[x]**2))
+    def errpropdiv(x,y,dx,dy):
+        if type(x) == np.ndarray:
+            array = [0] * len(x)
+            for t in range(0, len(x)):
+                array[t] = abs(x[t]/y[t]) * math.sqrt((dx[t]/x[t])**2 +\
+                    (dy[t]/y[t])**2)
             return array
-        elif type(self.drmsin)==int or type(self.drmsin)==np.float64 and\
-            type(self.drmsout)==int or type(self.drmsout)==np.float64:
-            return math.sqrt(self.drmsin**2 + self.drmsout**2))
+        elif type(x) == int or type(x) == np.float64:
+            return abs(x/y) * math.sqrt((dx/x)**2 + (dy/y)**2)
+        else:
+            print('You Passed Data Unusable For This Program')
 
     def del_plot(self,fignum,title,xlabel,ylabel,xscale,yscale,xdata,ydata,yerr):
         plt.figure(fignum)
