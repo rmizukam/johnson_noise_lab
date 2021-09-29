@@ -5,6 +5,7 @@ from scipy.optimize import curve_fit
 import math
 import matplotlib.pyplot as plt
 from Plotting_Fitting_Macros import linerrplt,errpropaddsubtract
+from Gain_Data import Gain_Data
 
 room_temp = 293 #Kelvin
 kb_true = 1.38064852E-23 # m^2 * kg * s^-2 * K^-1
@@ -194,7 +195,7 @@ enbwm, enbwb, denbwm, denbwb, f10 = linerrplt(10,\
         ftri9.corrected_del()]), 'yes')
 print('kb_enbw =', enbwm/(4*room_temp*10000), '+/-', denbwm/(4*room_temp*10000))
 
-ndm,ndb,dndm,dndb, f11= linerrplt(11,\
+ndm,ndb,dndm,dndb,f11= linerrplt(11,\
     'Johnson Noise vs Effective Noise Bandwidth',\
     'Frequency [Hz]','$<V_j^2> [V^2]$', 'linear', 'linear',\
     np.array([tri1.resistance,tri2.resistance,tri3.resistance,\
@@ -204,6 +205,29 @@ ndm,ndb,dndm,dndb, f11= linerrplt(11,\
     np.divide(errpropaddsubtract(np.array([ftri4_10.error(),ftri4_100.error(),\
         ftri4_1000.error(),ftri4.error()]), tri1.db),ftri4.enbw), 'yes')
 
+filter_trials = Gain_Data(\
+    [100,500,800,2000,5000,8000,20000,50000,80000,100000],\
+    [1.59,1.54,1.35,1.34,1.33,1.40,1.40,1.43,1.39,1.38],\
+    [0.0024,0.370,0.723,1.31,1.29,1.20,0.352,0.064,0.042,0.038],\
+    [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01],\
+    [0.0001,0.001,0.001,0.01,0.01,0.01,0.001,0.001,0.001,0.001])
+# filter_trials.print_types()
+# print(filter_trials.dgain())
+
+f12 = filter_trials.del_plot(12,'Gain vs Signal Frequency: log-log Scale',\
+    'Frequency [Hz]', 'Gain', 'log', 'log',filter_trials.freq,\
+    filter_trials.gain(), filter_trials.dgain())
+
+f13 = filter_trials.del_plot(13,'Gain vs Signal Frequency: linear Scale',\
+    'Frequency [Hz]', 'Gain', 'linear', 'linear',filter_trials.freq,\
+    filter_trials.gain(), filter_trials.dgain())
+
+f14 = filter_trials.del_plot(14,'$Gain^2$ vs Signal Frequency: Linear Scale',\
+    'Frequency [Hz]', '$Gain^2', 'linear', 'linear',filter_trials.freq,\
+    filter_trials.g2(),filter_trials.dg2())
+
+enbw1 = filter_trials.area_under_curve()
+print('ENBW =', enbw1)
 
 plt.close(f1)  # correction curve for noise vs r
 plt.close(f2)  # linear scale noise vs r
@@ -216,5 +240,9 @@ plt.close(f8)  # noise vs low pass
 plt.close(f9)  # noise vs f2-f1
 plt.close(f10) # noise vs enbw
 plt.close(f11) # noise density
+plt.close(f12) # gain vs frequency (log log)
+plt.close(f13) # gain vs frequency (linear)
+plt.close(f14) # gain^2 vs frequency (linear)
+
 
 plt.show()
