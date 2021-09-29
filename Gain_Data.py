@@ -20,6 +20,7 @@ class Gain_Data:
             type(self.rmsout)==int or type(self.rmsout)==np.float64:
             return self.rmsout / self.rmsin
 
+<<<<<<< HEAD
     def dgain(self):
         if type(self.rmsin)==list and type(self.rmsout)==list\
             and type(self.drmsin)==list and type(self.drmsout)==list:
@@ -67,6 +68,20 @@ class Gain_Data:
 
     def del_plot(self,fignum,title,xlabel,ylabel,xscale,yscale,xdata,ydata,yer):
         figname = plt.figure(fignum)
+=======
+    def del_gain(self):
+        if type(self.drmsin)==np.ndarray and type(self.drmsout)==np.ndarray:
+            array = []*len(self.drmsin)
+            for t in range(0, len(del_rmsin)):
+                array[x] = math.sqrt((self.drmsin[x]**2)+(self.drmsout[x]**2))
+            return array
+        elif type(self.drmsin)==int or type(self.drmsin)==np.float64 and\
+            type(self.drmsout)==int or type(self.drmsout)==np.float64:
+            return math.sqrt(self.drmsin**2 + self.drmsout**2)
+
+    def del_plot(self,fignum,title,xlabel,ylabel,xscale,yscale,xdata,ydata,yerr):
+        plt.figure(fignum)
+>>>>>>> d421a9a910e5866ff5c488f2518776d684e92a26
         plt.xlabel(xlabel, fontsize = 12)
         plt.ylabel(ylabel, fontsize = 12)
         plt.title(title, fontsize = 12)
