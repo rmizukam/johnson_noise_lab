@@ -11,13 +11,15 @@ def lin_func(x,b,m):
 
 def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
         ydata, yerror, show_fit):
-    fig_name = plt.figure(fig_num)
-    plt.xlabel(xlabel, fontsize = 12)
-    plt.ylabel(ylabel, fontsize = 12)
-    plt.title(title, fontsize = 12)
+    fig_name= plt.figure(fig_num, figsize=(12,8))
+    plt.xlabel(xlabel, fontsize = 16)
+    plt.ylabel(ylabel, fontsize = 16)
+    plt.title(title, fontsize = 18)
     plt.xscale(xscale)
     plt.yscale(yscale)
-    plt.errorbar(xdata,ydata,yerror,fmt='.',c='c')
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.errorbar(xdata,ydata,yerror,fmt='none', c='c')
     ans, cov = curve_fit(lin_func, xdata, ydata, sigma = yerror)
     fit_b = ans[0]
     fit_m = ans[1]
@@ -25,7 +27,8 @@ def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
     del_fit_b = math.sqrt(cov[0][0])
     del_fit_m = math.sqrt(cov[1][1])
     if show_fit == 'y' or show_fit == 'yes':
-        plt.plot(fit_x_span, lin_func(fit_x_span, fit_b, fit_m), c = 'r')
+        plt.plot(fit_x_span, lin_func(fit_x_span, fit_b, fit_m), c = 'orange')
+    plt.plot(xdata,ydata,c='r', marker='o',linestyle='None',markersize=5)
     return fit_m, fit_b, del_fit_m, del_fit_b, fig_name
 
 def errpropdiv(x,y,dx,dy):

@@ -6,6 +6,7 @@ import math
 import matplotlib.pyplot as plt
 from Plotting_Fitting_Macros import linerrplt,errpropaddsubtract
 from Gain_Data import Gain_Data
+import Temp_Depend as Temp_Depend
 
 room_temp = 293 #Kelvin
 kb_true = 1.38064852E-23 # m^2 * kg * s^-2 * K^-1
@@ -215,19 +216,32 @@ filter_trials = Gain_Data(\
 # print(filter_trials.dgain())
 
 f12 = filter_trials.del_plot(12,'Gain vs Signal Frequency: log-log Scale',\
-    'Frequency [Hz]', 'Gain', 'log', 'log',filter_trials.freq,\
+    'Frequency [Hz]', 'Gain [dB]', 'log', 'log',filter_trials.freq,\
     filter_trials.gain(), filter_trials.dgain())
 
 f13 = filter_trials.del_plot(13,'Gain vs Signal Frequency: linear Scale',\
-    'Frequency [Hz]', 'Gain', 'linear', 'linear',filter_trials.freq,\
+    'Frequency [Hz]', 'Gain [dB]', 'linear', 'linear',filter_trials.freq,\
     filter_trials.gain(), filter_trials.dgain())
 
 f14 = filter_trials.del_plot(14,'$Gain^2$ vs Signal Frequency: Linear Scale',\
-    'Frequency [Hz]', '$Gain^2', 'linear', 'linear',filter_trials.freq,\
+    'Frequency [Hz]', '$Gain^2 [dB^2]', 'linear', 'linear',filter_trials.freq,\
     filter_trials.g2(),filter_trials.dg2())
 
 enbw1 = filter_trials.area_under_curve()
 print('ENBW =', enbw1)
+
+# temp_diode = np.array([77.320,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320])
+vout_diode = np.array([.994419,.967032,.944477,.921305,.897616,.873417,.848864,.823964,.798691,.773213,.747485,.721533,.695363,.669002,.642448,.615748,.588907,.561837,.534655,.507311,.497881,.452258,.424465,.396645,.368731])
+dvout = np.array([0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.001])
+# ra = np.array([11.27, 11.36, 11.21, 11.29])
+# rb = np.array([9990, 9981, 9966, 9960])
+# rc = np.array([99520, 99660, 99980, 100550])
+# vout_ra=np.array([0.782,0.781,0.780,0.781,0.781,0.776,0.778,0.782,0.784,0.784,0.786,0.785,0.787,0.780,0.784,0.774,0.774,0.776,0.775,0.778])
+# vout_rb=np.array([0.931,0.927,0.933,0.922,0.928,1.018,1.025,1.027,1.030,1.029,0.814,0.815,0.819,0.820,0.818,0.722,0.723,0.721,0.722,0.721])
+# vout_rc=np.array([1.238,1.250,1.244,1.230,1.244,0.662,0.663,0.661,0.662,0.661,0.946,0.950,0.948,0.946,0.947,0.997,0.998,0.994,0.998,0.999])
+# gain = np.array([6000,6000,6000,6000,5000,5000,4000,3000,3000,2000,2000,1500])
+# current_1 = np.array([0.9899,0.943,0.7950,0.438])
+# current_10 = np.array([1.0062,0.963,0.8251,0.546])
 
 plt.close(f1)  # correction curve for noise vs r
 plt.close(f2)  # linear scale noise vs r

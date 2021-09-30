@@ -66,11 +66,14 @@ class Gain_Data:
 
 
     def del_plot(self,fignum,title,xlabel,ylabel,xscale,yscale,xdata,ydata,yer):
-        figname = plt.figure(fignum)
-        plt.xlabel(xlabel, fontsize = 12)
-        plt.ylabel(ylabel, fontsize = 12)
-        plt.title(title, fontsize = 12)
+        figname = plt.figure(fignum, figsize=(12,8))
+        plt.xlabel(xlabel, fontsize = 16)
+        plt.ylabel(ylabel, fontsize = 16)
+        plt.title(title, fontsize = 18)
         plt.xscale(xscale)
         plt.yscale(yscale)
-        plt.errorbar(xdata, ydata, yer, fmt='.',c='c')
+        plt.errorbar(xdata, ydata, yer,c='orange', ms=40)
+        plt.plot(xdata,ydata,c='c', marker='o',markersize=5)
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
         return figname
