@@ -9,7 +9,7 @@ def lin_func(x,b,m):
     y = b + m * x
     return y
 
-def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
+def linerrplt(fig_num,title, xlabel, ylabel, xscale, yscale, xdata,\
         ydata, yerror, show_fit):
     fig_name= plt.figure(fig_num, figsize=(12,8))
     plt.xlabel(xlabel, fontsize = 16)
@@ -23,12 +23,12 @@ def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
     ans, cov = curve_fit(lin_func, xdata, ydata, sigma = yerror)
     fit_b = ans[0]
     fit_m = ans[1]
-    fit_x_span = np.arange(0, (np.amax(xdata)+1))
+    fit_x_span = np.arange((np.amin(xdata)-0.1), (np.amax(xdata)+0.5))
     del_fit_b = math.sqrt(cov[0][0])
     del_fit_m = math.sqrt(cov[1][1])
     if show_fit == 'y' or show_fit == 'yes':
         plt.plot(fit_x_span, lin_func(fit_x_span, fit_b, fit_m), c = 'orange')
-    plt.plot(xdata,ydata,c='r', marker='o',linestyle='None',markersize=5)
+    plt.plot(xdata,ydata,c='r', marker='o',linestyle='None',markersize=4)
     return fit_m, fit_b, del_fit_m, del_fit_b, fig_name
 
 def errpropdiv(x,y,dx,dy):
@@ -87,6 +87,19 @@ def errpow(x,dx,pow_factor):
             array[t]
     elif type(x) == int or type(x) == np.float64:
         return abs(pow_factor) * x^(pow_factor - 1) * dx
+
+def pdiff(x,y):
+    return abs(x-y)/ ((x + y)/2)*100
+
+def printkbr(m,dm,denom):
+    kb_true = 1.38064852E-23 # m^2 * kg * s^-2 * K^-1
+    del_f1 = 110961 #hz
+    temperature_of_room = 293 # Kelvin
+    kb = m / (denom)
+    dkb = dm / (denom)
+    print('Boltzmann Constant 1: ', kb, ' +/- ', dkb)
+    print('% diff = ', pdiff(kb_true,kb))
+    print('..................................................')
 
 def uncertinmean(data):
     return (np.amax(data) - np.amin(data)) / (2*math.sqrt(len(data)))

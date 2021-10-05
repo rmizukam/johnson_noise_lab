@@ -254,9 +254,9 @@ plt.close(f8)  # noise vs low pass
 plt.close(f9)  # noise vs f2-f1
 plt.close(f10) # noise vs enbw
 plt.close(f11) # noise density
-plt.close(f12) # gain vs frequency (log log)
-plt.close(f13) # gain vs frequency (linear)
-plt.close(f14) # gain^2 vs frequency (linear)
+# plt.close(f12) # gain vs frequency (log log)
+# plt.close(f13) # gain vs frequency (linear)
+# plt.close(f14) # gain^2 vs frequency (linear)
 
 
 plt.show()
